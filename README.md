@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cmb84scd/acebook-HoneyBunnies.svg?branch=master)](https://travis-ci.org/cmb84scd/acebook-HoneyBunnies)
+
 # AceBook HoneyBunnies
 
 ### PROJECT DESCRIPTION:

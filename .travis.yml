@@ -1,0 +1,20 @@
+language: ruby
+services:
+- postgresql
+rvm:
+- 2.5.0
+
+install:
+- set -e;
+— gem uninstall bundler
+- gem install bundler -v 1.17.3
+- echo 'After bundler installed'
+- bundle install
+- echo 'After bundle installed';
+— RAILS_ENV=test bundle exec rake db:create --trace;
+- echo 'After database created';
+— RAILS_ENV=test bundle exec rake db:migrate --trace;
+- echo 'After migration'
+
+script:
+— bundle exec rspec
