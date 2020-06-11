@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   delete  '/',                  to: 'users#destroy'
   delete  '/posts/:id/edit',    to: 'posts#delete_image_attachment'
 
+  post '/friends',    to: 'friends#create'
+  delete '/friends',   to: 'friends#destroy'
+
   resources :posts
   resources :users
 end
