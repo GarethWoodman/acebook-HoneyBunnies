@@ -16,6 +16,9 @@
 
 <div>
   <% @posts.each do |post| %>
+  <%= image_tag(@user.image, class: 'rounded-circle', size: 100) if @user.image.attached? %><br>
+
+
     <div class='row'>
       <div class=''>
         <p><%= post.message %> Likes: <%= post.likes.size %></p>
