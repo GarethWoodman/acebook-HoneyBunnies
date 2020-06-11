@@ -1,12 +1,8 @@
-<% if session[:user_id] %>
-  <nav class='navbar navbar-light bg-dark'>
- <% else %>
-  <nav class='navbar navbar-light bg-dark'>
-<% end %>
+<nav class='navbar ace-blue text-white'>
   <div class='row container'>
-    <a href='/' class='badge text-white'><h2>acebook</h2></a>
+     <a href="/" class="navbar-brand logo text-white ace-logo">acebook</a>
   </div>
-  <div class='row'>
+  <div class='row justify-content-end'>
     <% if session[:user_id] %>
       <div class='col'>
         <%= link_to 'Sign Out', '/sessions/destroy', class: 'btn btn-light' %>

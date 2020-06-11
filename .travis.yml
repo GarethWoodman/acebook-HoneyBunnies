@@ -2,11 +2,10 @@ language: ruby
 services:
 - postgresql
 rvm:
-- 2.5.0
+- 2.6.6
 
 install:
 - set -e;
-— gem uninstall bundler
 - gem install bundler -v 1.17.3
 - echo 'After bundler installed'
 - bundle install

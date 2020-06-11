@@ -1,3 +1,9 @@
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
 <h1>Welcome <%= @user.fname %> <%= @user.lname %></h1>
 
 <div class="form-row align-items-center">
@@ -5,7 +11,7 @@
     <%= form_for @new_post do |post| %>
       <div>
         <%= post.label :message %>
-        <%= post.text_field :message, class: 'form-control'%>
+        <%= post.text_area :message, class: 'form-control'%>
         <%= post.label 'Add Images' %>
         <%= post.file_field :images, multiple: true %></br>
         <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2" %>
@@ -16,9 +22,17 @@
 
 <div>
   <% @posts.each do |post| %>
+    <% likes = []%>
+  <%= image_tag(@user.image, class: 'rounded-circle', size: 100) if @user.image.attached? %><br>
+
     <div class='row'>
-      <div class=''>
-        <p><%= post.message %> Likes: <%= post.likes.size %></p>
+      <div class='atooltip'><p><%= post.message %> Likes: <%= post.likes.size %></p>
+        <% post.likes.each do |like| %>
+          <% likes << like.user.fname %>
+        <% end %>
+        <% if post.likes.size != 0 %>
+          <span class="atooltiptext"> <%= likes.join("\n")%></span>
+        <% end %>
       </div>
     </div>
 
@@ -37,14 +51,20 @@
 
     <div class='row'>
       <%= button_to 'Delete Post', {:controller => :posts,
-          :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+      :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
 
-          <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button'>Update Post</a>
+      <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button'>Update Post</a>
 
-          <%= button_to 'Like Post', {:controller => :likes,
-              :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
+      <% if likes.include?(@user.fname) %>
+        <%= button_to 'Unlike Post', {:controller => :likes,
+        :action => 'destroy', :post_id => post.id, :user_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+      <% else %>
+        <%= button_to 'Like Post', {:controller => :likes,
+          :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
+      <% end %>
     </div>
   <% end %>
+</div>
 
 <div class='container my-3'>
   <a href='/posts/new' class='btn btn-primary btn-sm' role='button'>New Posts</a>
