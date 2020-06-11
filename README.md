@@ -2,9 +2,17 @@
 
 # AceBook HoneyBunnies
 
+<img src="https://media1.giphy.com/media/goIcmbcUMEnyE/giphy.gif?cid=ecf05e47be443a5eb3c26bc7bafae7a799a461b4e818cc10&rid=giphy.gif" width=60%>
+
 ### PROJECT DESCRIPTION:
 
 For this project we worked in a team to produce a social media platform.
+
+### APP DEPLOYMENT
+
+- We used Travis CI 
+- We deployed the app using Heroku, only deploys when Travis is passing
+- Visit [Honey Bunnies Acebook](https://acebook-honeybunnies.herokuapp.com/)
 
 ### REQUIRED INSTRUCTIONS:
 
