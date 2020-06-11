@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   post '/sessions', to: 'sessions#create'
   get '/sessions/destroy', to: 'sessions#destroy'
 
+  post '/friends',    to: 'friends#create'
+  delete '/friends',   to: 'friends#destroy'
+
   post '/likes', to: 'likes#create'
   delete '/', to: 'users#destroy'
   delete '/posts/:id/edit', to: 'posts#delete_image_attachment'
