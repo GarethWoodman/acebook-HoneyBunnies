@@ -9,3 +9,28 @@
   width: 33.33%;
   padding: 5px;
 }
+
+.atooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.atooltip .atooltiptext {
+  visibility: hidden;
+  width: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.atooltip:hover .atooltiptext {
+  visibility: visible;
+}
