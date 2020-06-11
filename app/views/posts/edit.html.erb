@@ -13,7 +13,7 @@
     <%= form_for @post do |post| %>
       <div>
         <%= post.label :message %>
-        <%= post.text_field :message, class: 'form-control'%>
+        <%= post.text_area :message, class: 'form-control'%>
         <%= post.file_field :images, multiple: true %><br>
         <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2" %>
       </div>
