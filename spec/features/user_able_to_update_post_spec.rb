@@ -23,7 +23,6 @@ RSpec.feature 'Update Post', type: :feature do
     expect(page).to have_content('New Message!')
   end
 
-
   # scenario 'user is able to delete a picture' do
   #   user = User.create(fname: 'Jon', lname: 'Doe', email: 'john.doe@example.com', password: 'password')
 

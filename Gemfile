@@ -7,10 +7,10 @@ end
 
 gem 'travis'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'activestorage-validator'
+gem 'bootsnap'
 gem 'rails', '~> 5.2.2'
 gem 'railties', '~> 5.2.2'
-gem 'bootsnap'
-gem 'activestorage-validator'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
