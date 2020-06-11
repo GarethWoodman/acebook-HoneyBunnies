@@ -26,6 +26,19 @@ class PostsController < ApplicationController
     redirect_to posts_url
   end
 
+  # def delete_image_attachment
+  #   @post = Post.find(params[:id])
+  #   # @upload = @product.ActiveStorage::Attachment.find(params[:id])
+  #   @upload.purge
+  #   p '****************'
+  #   p @post
+  #   p params
+  #   # p @post.ActiveStorage::Attachment.find(params[:id]) 
+  #   # @post_image.purge_later
+
+  #   redirect_to "/posts/#{@post.id}/edit"
+  # end
+
   def index
     @new_post = new_post
     @posts = Post.all
@@ -35,7 +48,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:message)
+    params.require(:post).permit(:message, images: [])
   end
 
   def new_post

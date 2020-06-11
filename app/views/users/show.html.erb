@@ -1,16 +1,27 @@
 <h1>User Account details</h1>
 
-<ul>
-  <li>
-    <%= @user.fname %>
-  </li>
-  <li>
-    <%= @user.lname %>
-  </li>
-   <li>
-    <%= @user.email %>
-  </li>
-</ul>
+<% if @user.image.attached? %>
+  <div>
+    <%= image_tag(@user.image, class: 'img-thumbnail float-left') %>
+  </div>
+<% end%>
+<div class='row'>
+  <div class='col'>
+    <ul>
+      <li>
+        <%= @user.fname %>
+      </li>
+      <li>
+        <%= @user.lname %>
+      </li>
+      <li>
+        <%= @user.email %>
+      </li>
+    </ul>
+    <div class='col'>
+      <%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary' %>
+      <%= link_to 'Delete Account', '/', method: :delete, data: { confirm: 'Are you sure you want to delete your account?' }, class: 'btn btn-danger'%>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary' %>
-<%= link_to 'Delete Account', '/', method: :delete, data: { confirm: 'Are you sure you want to delete your account?' }, class: 'btn btn-danger'%>

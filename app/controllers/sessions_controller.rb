@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to "/posts"
     else
-      # flash[:alert] = 'Email and/or password is incorrect'
       redirect_to '/sessions/new', notice: 'Email and/or password is incorrect'
     end
   end

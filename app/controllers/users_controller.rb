@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(session[:user_id])
+    @user.destroy
     session[:user_id] = nil
     redirect_to '/', notice: 'Account deleted successfully'
   end
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:fname, :lname, :email, :password, :password_confirmation)
+    params.require(:user).permit(:fname, :lname, :email, :password, :password_confirmation, :image)
   end
 
 end

@@ -2,23 +2,36 @@
 
 User ID <%= @user.id %>
 
-<%= form_for @user, :url => {:controller => 'users', :action => 'update'} do |f| %>
+<% if @user.image.attached? %>
+  <div>
+    <%= image_tag(@user.image, class: 'img-thumbnail float-left') %>
+  </div>
+<% end%>
 
-  <%= f.label 'First Name' %>
-  <%= f.text_field :fname %> <br />
+<div class='row'>
+  <div class='col'>
+    <%= form_for @user, :url => {:controller => 'users', :action => 'update'} do |f| %>
 
-  <%= f.label 'Last Name' %>
-  <%= f.text_field :lname %> <br />
+      <%= f.label 'First Name' %>
+      <%= f.text_field :fname %> <br />
 
-  <%= f.label :email %>
-  <%= f.text_field :email %> <br />
+      <%= f.label 'Last Name' %>
+      <%= f.text_field :lname %> <br />
 
-  <%= f.label :password %>
-  <%= f.password_field :password %> <br />
+      <%= f.label :email %>
+      <%= f.text_field :email %> <br />
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %> <br />
+      <%= f.label :image %>
+      <%= f.file_field :image %> <br />
 
-  <%= f.submit "Update Profile" %>
+      <%= f.label :password %>
+      <%= f.password_field :password %> <br />
 
-<% end %>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %> <br />
+
+      <%= f.submit "Update Profile" %>
+
+    <% end %>
+  </div>
+</div>

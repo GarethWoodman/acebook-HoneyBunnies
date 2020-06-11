@@ -11,6 +11,7 @@
       <div class='col'>
         <%= link_to 'Sign Out', '/sessions/destroy', class: 'btn btn-light' %>
         <%= link_to 'Profile', "/users/#{session[:user_id]}", class: 'btn btn-light' %>
+        <%= link_to 'All Posts', '/posts', class: 'btn btn-light' %>
       </div>
     <% else %>
       <div class='col'>

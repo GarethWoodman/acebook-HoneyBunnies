@@ -13,6 +13,7 @@ feature 'User account registration', type: :feature do
     fill_in 'user[email]', with: 'john@example.com'
     fill_in 'user[password]', with: 'password'
     fill_in 'user[password_confirmation]', with: 'password'
+    attach_file 'user[image]', "#{Rails.root}/spec/files/MVC_DataB.png"
     find('[name=commit]').click
 
     expect(current_path).to eq '/sessions/new'

@@ -10,6 +10,7 @@ RSpec.feature 'Delete Post', type: :feature do
     click_button 'Sign in'
 
     fill_in 'Message', with: 'Hello, world!'
+    attach_file 'post[images][]', "#{Rails.root}/spec/files/MVC_DataB.png"
     click_button 'Submit'
 
     all(:button, 'Delete Post').last.click
