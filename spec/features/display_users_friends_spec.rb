@@ -10,12 +10,15 @@ RSpec.feature 'Display Users friends', type: :feature do
     click_button 'Sign in'
 
     buggs = User.create(fname: 'Buggs', lname: 'Bunny', email: 'buggs@example.com', password: 'password')
-    Friend.create(user_id: jon.id, friend_id: buggs.id)
-    Friend.create(user_id: buggs.id, friend_id: jon.id)
 
-    visit "/users/#{jon.id}"
+    visit "/users/#{buggs.id}"
 
     expect(page).to have_content('Friends')
-    expect(page).to have_content('Buggs')
+
+    click_button 'Add Friend'
+    expect(page).to have_content('Jon')
+
+    click_button 'Remove Friend'
+    expect(page).to_not have_content('Jon')
   end
 end
