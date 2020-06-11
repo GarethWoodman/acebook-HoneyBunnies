@@ -24,8 +24,8 @@ RSpec.feature 'Update Post', type: :feature do
   end
 
   scenario 'user is able to delete a picture' do
-    user = User.create(fname: 'Jon', lname: 'Doe', email: 'john.doe@example.com', password: 'password')
-    
+    User.create(fname: 'Jon', lname: 'Doe', email: 'john.doe@example.com', password: 'password')
+
     visit '/sessions/new'
 
     fill_in 'user[email]', with: 'john.doe@example.com'

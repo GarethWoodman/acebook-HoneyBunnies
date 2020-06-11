@@ -6,7 +6,6 @@ rvm:
 
 install:
 - set -e;
-# — gem uninstall bundler
 - gem install bundler -v 1.17.3
 - echo 'After bundler installed'
 - bundle install
