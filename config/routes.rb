@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   post '/likes', to: 'likes#create'
   delete '/', to: 'users#destroy'
-
+  delete '/posts/:id/edit', to: 'posts#delete_image_attachment'
   resources :posts
   resources :users
 end
