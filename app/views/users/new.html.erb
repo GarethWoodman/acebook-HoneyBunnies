@@ -1,32 +1,34 @@
-<% if session[:user_id] %>
-  <h2>Welcome to acebook</h2>
+<div class='float-right'>
 
-<% else %>
+  <% if session[:user_id] %>
+    <h2>Welcome to acebook</h2>
 
-  <h1>Create account</h1>
+  <% else %>
 
-  <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
+    <h1>Create account</h1>
+    <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
 
-    <%= f.label 'First Name' %>
-    <%= f.text_field :fname %> <br />
+      <%= f.label 'First Name' %>
+      <%= f.text_field :fname %> <br />
 
-    <%= f.label 'Last Name' %>
-    <%= f.text_field :lname %> <br />
+      <%= f.label 'Last Name' %>
+      <%= f.text_field :lname %> <br />
 
-    <%= f.label :email %>
-    <%= f.text_field :email %> <br />
+      <%= f.label :email %>
+      <%= f.text_field :email %> <br />
 
-    <%= f.label :password %>
-    <%= f.password_field :password %> <br />
+      <%= f.label :password %>
+      <%= f.password_field :password %> <br />
 
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %> <br />
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %> <br />
 
-    <%= f.label :image %>
-    <%= f.file_field :image%>
+      <%= f.label :image %>
+      <%= f.file_field :image%> <br />
 
-    <%= f.submit "Create account" %>
+      <%= f.submit "Create account" %>
+
+    <% end %>
 
   <% end %>
-
-<% end %>
+  </div>

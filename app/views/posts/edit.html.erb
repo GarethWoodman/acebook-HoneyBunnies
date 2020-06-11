@@ -3,8 +3,7 @@
   <% (0...@post.images.count).each do |number| %>
     <div class='column'>
       <%= image_tag(@post.images[number], class: "rounded", id: "#{@post.images[number].id}") %> <br>
-      <%# button_to 'Delete', {:controller => :posts,
-          :action => 'delete_image_attachment', :id => @post.images.record.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+      <% link_to 'Delete' %>
     </div>
   <% end %>
 </div>
