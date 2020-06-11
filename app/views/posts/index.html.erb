@@ -11,7 +11,7 @@ $(document).ready(function(){
     <%= form_for @new_post do |post| %>
       <div>
         <%= post.label :message %>
-        <%= post.text_field :message, class: 'form-control'%>
+        <%= post.text_area :message, class: 'form-control'%>
         <%= post.label 'Add Images' %>
         <%= post.file_field :images, multiple: true %></br>
         <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2" %>
@@ -23,6 +23,8 @@ $(document).ready(function(){
 <div>
   <% @posts.each do |post| %>
     <% likes = []%>
+  <%= image_tag(@user.image, class: 'rounded-circle', size: 100) if @user.image.attached? %><br>
+
     <div class='row'>
       <div class='atooltip'><p><%= post.message %> Likes: <%= post.likes.size %></p>
         <% post.likes.each do |like| %>

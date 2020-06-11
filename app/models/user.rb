@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, length: { minimum: 5 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :image, presence: false, blob: { content_type: ['image/png','image/jpg']}
+  validates :image, presence: false, blob: { content_type: ['image/png', 'image/jpg'] }
 end

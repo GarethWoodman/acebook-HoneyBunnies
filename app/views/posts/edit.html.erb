@@ -3,7 +3,10 @@
   <% (0...@post.images.count).each do |number| %>
     <div class='column'>
       <%= image_tag(@post.images[number], class: "rounded", id: "#{@post.images[number].id}") %> <br>
-      <% link_to 'Delete' %>
+      <%# link_to 'Delete', @post, :method => :delete_image_attachment, data: {:confirm => "You sure?" } %>
+       <%= button_to 'Delete', {:controller => :posts,
+              :action => 'delete_image_attachment', :image_id => @post.images.records[number].blob_id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+    <%= @post.images.records[number].blob_id %>
     </div>
   <% end %>
 </div>
@@ -13,7 +16,7 @@
     <%= form_for @post do |post| %>
       <div>
         <%= post.label :message %>
-        <%= post.text_field :message, class: 'form-control'%>
+        <%= post.text_area :message, class: 'form-control'%>
         <%= post.file_field :images, multiple: true %><br>
         <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2" %>
       </div>
