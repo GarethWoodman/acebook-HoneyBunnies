@@ -68,10 +68,10 @@
               <div class="but">
                 <% if likes.include?(@user.fname) %>
                   <%= button_to 'Unlike Post', {:controller => :likes,
-                  :action => 'destroy', :post_id => post.id, :user_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary button ace-blue' %>
+                  :action => 'destroy', :post_id => post.id, :user_id => @user.id, :path => "/posts" }, :method => :delete, class: 'btn btn-sm btn-primary button ace-blue' %>
                 <% else %>
                   <%= button_to 'Like Post', {:controller => :likes,
-                    :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary ace-blue' %>
+                    :action => 'create', :post_id => post.id, :path => "/posts" }, :method => :post, class: 'btn btn-sm btn-primary ace-blue' %>
                 <% end %>
               </div>
             </div>
