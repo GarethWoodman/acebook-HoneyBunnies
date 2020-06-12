@@ -1,44 +1,39 @@
+<div class='ace-logo text-center my-5'>
+  <h1>Edit your profile <strong><%= @user.fname %></strong></h1>
+</div>
 
 <div class="d-flex justify-content-center align-items-center">
 
   <% if @user.image.attached? %>
-    <div class="m-4">
+    <div class="mx-3 ">
       <%= image_tag(@user.image, class: 'rounded-circle', size: 200) %>
     </div>
   <% else %>
-    <div class="col-md-4">
+    <div class="mx-3">
       <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png" class="rounded-circle-avatar" alt="Avatar">
     </div>
   <% end%>
 
-  <div class='my-5'>
+  <div class='my-2 form-div'>
     <%= form_for @user, :url => {:controller => 'users', :action => 'update'} do |f| %>
-    <div class='ace-logo'>
-      <h1>Edit your profile <strong><%= @user.fname %></h1></strong>
-    </div>
-      <div class='row card-body'>
-        <div class='my-2'>
-          <%= f.label 'First Name' %>
-          <%= f.text_field :fname %> <br />
 
-          <%= f.label 'Last Name' %>
-          <%= f.text_field :lname %> <br />
+      <!-- <div class='row card-body'> -->
+        <div class='m-1'>
+          <%= f.text_field :fname, placeholder: 'First Name', class: 'my-2' %> <br />
 
-          <%= f.label :email %>
-          <%= f.text_field :email %> <br />
+          <%= f.text_field :lname, placeholder: 'Last Name', class: 'my-2' %> <br />
 
-          <%= f.label :image %>
-          <%= f.file_field :image %> <br />
+          <%= f.text_field :email, placeholder: 'Email', class: 'my-2' %> <br />
 
-          <%= f.label :password %>
-          <%= f.password_field :password %> <br />
+          <%= f.password_field :password, placeholder: 'Password', class: 'my-2' %> <br />
 
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation %> <br />
+          <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'my-2' %> <br />
+
+          <%= f.file_field :image, placeholder: 'Image', class: 'my-2' %> <br />
 
           <%= f.submit "Update Profile", class: 'btn btn-primary ace-blue' %>
         </div>
-      </div>
+      <!-- </div> -->
     <% end %>
   </div>
 </div>
