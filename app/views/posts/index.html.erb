@@ -1,73 +1,93 @@
-<script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
-</script>
-
-<h1>Welcome <%= @user.fname %> <%= @user.lname %></h1>
-
-<div class="form-row align-items-center">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for @new_post do |post| %>
-      <div>
-        <%= post.label :message %>
-        <%= post.text_area :message, class: 'form-control'%>
-        <%= post.label 'Add Images' %>
-        <%= post.file_field :images, multiple: true %></br>
-        <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2" %>
+<div class="holder">
+    <div class="card text-center">
+      <div class="card-header ace-welcome">
+        <h2>Welcome <%= @user.fname.capitalize %> <%= @user.lname.capitalize %></h2>
       </div>
-    <% end %>
-  </div>
-</div>
-
-<div>
-  <% @posts.each do |post| %>
-    <% likes = []%>
-  <%= image_tag(@user.image, class: 'rounded-circle', size: 100) if @user.image.attached? %><br>
-
-    <div class='row'>
-      <div class='atooltip'><p><%= post.message %> Likes: <%= post.likes.size %></p>
-        <% post.likes.each do |like| %>
-          <% likes << like.user.fname %>
-        <% end %>
-        <% if post.likes.size != 0 %>
-          <span class="atooltiptext"> <%= likes.join("\n")%></span>
-        <% end %>
-      </div>
-    </div>
-
-      <div class='row'>
-        <% (0...post.images.count).each do |number| %>
-          <div class='column'>
-            <%= image_tag(post.images[number], class: 'rounded', id: "#{number}") %><br>
+      <div class="my-4 float-right">
+        <%= form_for @new_post do |post| %>
+          <div class="col">
+              <div class='col-sm'>
+                <%= post.label :message, class: 'text-white'%>
+                <%= post.text_area :message, class: 'form-control', placeholder: 'Say something to the world...'%>
+              </div>
+              <div class="row my-2">
+                <%= post.submit "Submit", class: "btn btn-primary ml-5 my-2 btn-header ace-blue" %>
+                <%= post.file_field :images, multiple: true, class: 'mx-2 my-3'%>
+              </div>
+              <div class="col-sm submit">
+              </div>
           </div>
         <% end %>
       </div>
-
-    <div class='row'>
-      <p>Posted at: <%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %></p><br>
-      User ID: <%= post.user_id %>
     </div>
+    <div class="container my-2">
+        <% @posts.each do |post| %>
+          <% likes = []%>
+          <div class="row">
+            <div class="col avatar">
+              <%= image_tag(@user.image, class: 'rounded-circle', size: 80) if @user.image.attached? %><br>
+            </div>
+            <div class="col-10 card-body post">
+              <div class="atooltip">
+                <p><%= post.message %></p>
+                <% post.likes.each do |like| %>
+                  <% likes << like.user.fname %>
+                <% end %>
+                <% if post.likes.size != 0 %>
+                  <span class="atooltiptext"> <%= likes.join("\n")%></span>
+                <% end %>
+                <p class="likes">Likes: <%= post.likes.size %></p>
+              </div>
+          </div>
+          <div class="container my-2 image-container">
+            <div class="row">
+              <% (0...post.images.count).each do |number| %>
+                <div class="col">
+                  <%= image_tag(post.images[number], class: 'rounded m-2', id: "#{number}") %><br>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class='text-muted'>Posted at: <%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %></p>
+            </div>
+          </div>
 
-    <div class='row'>
-      <%= button_to 'Delete Post', {:controller => :posts,
-      :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+          <% if session[:user_id] == post.user.id %>
+          <div class="container">
+            <div class="row buttons">
+              <div class="but">
+                <%= button_to 'Delete Post', {:controller => :posts,
+                    :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary button ace-blue' %>
+              </div>
+              <div class="but">
+                <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm button ace-blue' role='button'>Update Post</a>
+              </div>
 
-      <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button'>Update Post</a>
+              <div class="but">
+                <% if likes.include?(@user.fname) %>
+                  <%= button_to 'Unlike Post', {:controller => :likes,
+                  :action => 'destroy', :post_id => post.id, :user_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary button ace-blue' %>
+                <% else %>
+                  <%= button_to 'Like Post', {:controller => :likes,
+                    :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary ace-blue' %>
+                <% end %>
+              </div>
+            </div>
+         </div>
+         <% else %>
+            <div class="container but">
+                <% if likes.include?(@user.fname) %>
+                  <%= button_to 'Unlike Post', {:controller => :likes,
+                  :action => 'destroy', :post_id => post.id, :user_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary button ace-blue' %>
+                <% else %>
+                  <%= button_to 'Like Post', {:controller => :likes,
+                    :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary ace-blue' %>
+                <% end %>
+              </div>
+        <% end %>
 
-      <% if likes.include?(@user.fname) %>
-        <%= button_to 'Unlike Post', {:controller => :likes,
-        :action => 'destroy', :post_id => post.id, :user_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
-      <% else %>
-        <%= button_to 'Like Post', {:controller => :likes,
-          :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
-      <% end %>
+        <% end %>
     </div>
-  <% end %>
 </div>
-
-<div class='container my-3'>
-  <a href='/posts/new' class='btn btn-primary btn-sm' role='button'>New Posts</a>
-</div>
-
-USER ID <%= session[:user_id] %>
