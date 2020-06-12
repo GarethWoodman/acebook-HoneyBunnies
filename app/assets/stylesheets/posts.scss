@@ -3,47 +3,39 @@
   height: 15em;
   overflow: hidden;
 }
-
 .column {
   float: left;
   width: 33.33%;
   padding: 5px;
 }
-
 .card-body {
   margin-top: 25px;
   padding-left: 150px;
   padding-right: 150px;
 }
-
 .submit {
   text-align: right;
   margin: 2px;
 }
-
 .file-field {
   text-align: left;
   border-width: 1px;
   padding: 5px;
   margin: 5px;
 }
-
 .btn-header {
   width: 150px;
 }
-
 .holder {
   padding: 75px;
   box-shadow: 9px 9px 15px #bbb;
   background-color: #fff;
 }
-
 .avatar {
   text-align: center;
   padding: 25px;
   margin: 10px;
 }
-
 .post {
   padding: 25px;
   margin: 15px;
@@ -54,17 +46,12 @@
   // overflow: hidden;
 }
 
-// .post-container {
-//   margin: 5px;
-//   padding: 25px;
-// }
 
 .likes {
   font-family: "Lucida Console", Courier, monospace;
   font-size: 1em;
   color: #808080;
 }
-
 .buttons {
   padding: 0px;
   width: auto;
