@@ -78,7 +78,8 @@
                   <%= post.text_area :message, class: 'form-control'%>
                   <%= post.label 'Add Images' %>
                   <%= post.file_field :images, multiple: true %></br>
-                  <%= post.submit "Submit", class: "btn btn-primary my-2 ace-blue", id: "user_posts" %>
+                  <%= hidden_field_tag 'on_users_page', true  %>
+                  <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2", id: "user_posts" %>
                 </div>
               <% end %>
             </div>
@@ -103,7 +104,7 @@
             <div class='row my-1'>
               <% if @user.id == session[:user_id] %>
                 <%= button_to 'Delete Post', {:controller => :posts,
-                :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-danger', id: 'user_posts' %>
+                :action => 'destroy', :id => post.id, :on_users_page => true }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
 
                 <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm ace-blue' role='button' id='user_posts'>Update Post</a>
               <% end %>
