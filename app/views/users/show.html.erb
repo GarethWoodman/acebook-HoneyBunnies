@@ -107,7 +107,7 @@
 
               <% if likes.include?(User.find(session[:user_id]).fname) %>
                 <%= button_to 'Unlike Post', {:controller => :likes,
-                :action => 'destroy', :post_id => post.id, :user_id => @user.id, :path => "/users/#{@user.id}" }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
+                :action => 'destroy', :post_id => post.id, :user_id => session[:user_id], :path => "/users/#{@user.id}" }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
               <% else %>
                 <%= button_to 'Like Post', {:controller => :likes,
                   :action => 'create', :post_id => post.id, :path => "/users/#{@user.id}" }, :method => :post, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
