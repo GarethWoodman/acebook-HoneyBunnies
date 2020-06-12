@@ -1,3 +1,11 @@
+<style>
+  #user_posts {
+    margin-right: 5px;
+    font-size: 11px;
+    text-align: center;
+  }
+</style>
+
 <div class="d-flex justify-content-center align-items-center">
   <div class='my-5'>
     <div style="width: 100%; overflow: hidden;">
@@ -58,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div style="width: 300px; margin-left: 500px;">
+      <div style="width: 400px; margin-left: 500px;">
         <h3> Posts </h3>
         <% @user.posts.each do |post| %>
           <% likes = []%>
@@ -74,17 +82,17 @@
             <div class='row'>
               <% if @user.id == session[:user_id] %>
                 <%= button_to 'Delete Post', {:controller => :posts,
-                :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+                :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
 
-                <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button'>Update Post</a>
+                <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button' id='user_posts'>Update Post</a>
               <% end %>
 
-              <% if likes.include?(@user.fname) %>
+              <% if likes.include?(User.find(session[:user_id]).fname) %>
                 <%= button_to 'Unlike Post', {:controller => :likes,
-                :action => 'destroy', :post_id => post.id, :user_id => @user.id, :path => "/users/#{@user.id}" }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+                :action => 'destroy', :post_id => post.id, :user_id => @user.id, :path => "/users/#{@user.id}" }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
               <% else %>
                 <%= button_to 'Like Post', {:controller => :likes,
-                  :action => 'create', :post_id => post.id, :path => "/users/#{@user.id}" }, :method => :post, class: 'btn btn-sm btn-primary' %>
+                  :action => 'create', :post_id => post.id, :path => "/users/#{@user.id}" }, :method => :post, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
               <% end %>
             </div>
         <% end %>
