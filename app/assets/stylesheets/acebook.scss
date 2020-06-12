@@ -16,12 +16,15 @@ a:hover {
   font-size: 38px;
   font-weight: 600;
 }
-#file-upload-button {
-  background-color: #3B5999;
+.rounded-circle-avatar {
+  width: 100%;
+  border-radius: 50%;
 }
-#user_image input[type="file"] {
-  display: none;
-  }
+#first_email, #first_password {
+  min-height: 35px;
+  padding-bottom: 5px;
+  margin: 6px;
+}
   
 @media all and (max-width: 900px) {
   #bunny {
