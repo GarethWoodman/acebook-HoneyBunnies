@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = session[:user_id]
     @post.save
-    redirect_to posts_url
+    on_users_page?
   end
 
   def edit
@@ -17,13 +17,13 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to posts_url
+    on_users_page?
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_url
+    on_users_page?
   end
 
   def delete_image_attachment
@@ -40,6 +40,14 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def on_users_page?
+    if params[:on_users_page]
+      redirect_to "/users/#{session[:user_id]}"
+    else
+      redirect_to posts_url
+    end
+  end
 
   def post_params
     params.require(:post).permit(:message, images: [])
