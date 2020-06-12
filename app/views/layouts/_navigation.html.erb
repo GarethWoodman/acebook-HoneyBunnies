@@ -11,7 +11,11 @@
       </div>
     <% else %>
       <div class='row'>
-        <%= link_to 'Sign In', '/sessions/new', class: 'btn btn-sm btn-light' %>
+        <% if current_page? '/sessions/new' %>
+          <%= link_to 'Sign Out', '/sessions/destroy', class: 'btn btn-sm btn-light' %>
+        <% else %>
+          <%= link_to 'Sign In', '/sessions/new', class: 'btn btn-sm btn-light' %>
+        <% end %>
       </div>
     <% end %>
   </div>
