@@ -1,38 +1,43 @@
 
-<div class='row float-right'>
-  <div class=''>
-    <div class=''>
-      <div class='card-body'>
-       <img src='https://i.redd.it/29p2kvnhespy.gif' alt='Flowers in Chania' id='bunny' class='rounded-circle'>
+
+<div class="card-group my-5 float-right">
+  <div class="row">
+
+    <div class="col-sm mr-1">
+      <div class=''>
+        <img src='https://i.redd.it/29p2kvnhespy.gif' alt='Flowers in Chania' id='bunny' class='rounded-circle'>
       </div>
     </div>
-  </div>
-  <div class=''>
-    <div class=''>
-      <div class='card-body'>
-        <% if session[:user_id] %>
-          <h2>Welcome to acebook</h2>
-        <% else %>
-        <div class='ace-logo'>
-          <h1>Create account</h1>
-        </div>
-          <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
-            <div class='card bg-transparent border-0'>
-            <%= f.text_field :fname, placeholder: 'Name', class: 'my-2' %>
 
-            <%= f.text_field :lname, placeholder: 'Last Name', class: 'my-2' %>
-            <%= f.text_field :email, placeholder: 'email', class: 'my-2' %>
+    <div class="col-sm">
 
-            <%= f.password_field :password, placeholder: 'Password', class: 'my-2' %>
-            <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'my-2' %>
-            <%= f.file_field :image, class: 'my-4'%>
-            <div>
-              <%= f.submit 'Create account', class: 'btn btn-primary ace-blue' %>
-            </div>
-            </div>
+      <div class='mr-5' style="min-width: 300px;">
+        <div class=''>
+          <% if session[:user_id] %>
+            <h2>Welcome to acebook</h2>
+          <% else %>
+          <div class='ace-logo'>
+            <h1>Create account</h1>
+          </div>
+            <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
+              <div class='card bg-transparent border-0'>
+              <%= f.text_field :fname, placeholder: 'Name', class: 'my-2' %>
+
+              <%= f.text_field :lname, placeholder: 'Last Name', class: 'my-2' %>
+              <%= f.text_field :email, placeholder: 'email', class: 'my-2' %>
+
+              <%= f.password_field :password, placeholder: 'Password', class: 'my-2' %>
+              <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'my-2' %>
+              <%= f.file_field :image, class: 'my-4'%>
+              <div>
+                <%= f.submit 'Create account', class: 'btn btn-primary ace-blue' %>
+              </div>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
+  
     </div>
   </div>
 </div>
