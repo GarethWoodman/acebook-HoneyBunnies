@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="container post-container">
+    <div class="container my-2">
         <% @posts.each do |post| %>
           <% likes = []%>
 
@@ -45,12 +45,14 @@
               </div>
           </div>
 
-          <div class="row">
-            <% (0...post.images.count).each do |number| %>
-              <div class="col">
-                <%= image_tag(post.images[number], class: 'rounded', id: "#{number}") %><br>
-              </div>
-            <% end %>
+          <div class="container my-2 image-container">
+            <div class="row">
+              <% (0...post.images.count).each do |number| %>
+                <div class="col">
+                  <%= image_tag(post.images[number], class: 'rounded m-2', id: "#{number}") %><br>
+                </div>
+              <% end %>
+            </div>
           </div>
 
           <div class="row">

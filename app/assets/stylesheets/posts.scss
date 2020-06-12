@@ -50,9 +50,14 @@
   font-size: 20px;
 }
 
-.post-container {
-  border-bottom: 1px black;
+.row, .image-container {
+  // overflow: hidden;
 }
+
+// .post-container {
+//   margin: 5px;
+//   padding: 25px;
+// }
 
 .likes {
   font-family: "Lucida Console", Courier, monospace;
@@ -61,14 +66,12 @@
 }
 
 .buttons {
-  // background-color: lightgray;
   padding: 0px;
   width: auto;
 }
 
 .but{
   display: inline;
-  // background-color: yellow;
   padding-left: 0px;
   margin-right: 5px;
 }
@@ -78,7 +81,7 @@
 // 	// border-color: white;
 //   color: white;
 // }
-// 
+//
 // .button {
 // 	background-color:;
 //   color: blue;
