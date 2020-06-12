@@ -10,6 +10,7 @@ ruby '2.6.6'
 gem 'travis'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'activestorage-validator'
+gem "aws-sdk-s3", require: false
 gem 'bootsnap'
 gem 'rails', '~> 5.2.2'
 gem 'railties', '~> 5.2.2'
