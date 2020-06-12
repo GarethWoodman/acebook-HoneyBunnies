@@ -1,8 +1,81 @@
-<script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
-</script>
+<div class="holder">
+
+    <div class="card text-center">
+
+      <div class="card-header">
+        <h5>Welcome <%= @user.fname.capitalize %> <%= @user.lname.capitalize %></h5>
+      </div>
+
+      <div class="card-body float-right">
+        <%= form_for @new_post do |post| %>
+          <div class="row">
+              <%= post.label :message %>
+              <%= post.text_area :message, class: 'form-control', placeholder: 'Say something to the world...'%>
+              <div class="row file-field">
+                <%= post.file_field :images, multiple: true %>
+              </div>
+              <div class="col submit">
+                <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2 btn-header" %>
+              </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="container post-container">
+        <% @posts.each do |post| %>
+          <div class="row">
+
+            <div class="col avatar">
+              <%= image_tag(@user.image, class: 'rounded-circle', size: 80) if @user.image.attached? %><br>
+            </div>
+            <div class="col-10 card-body post">
+              <p><%= post.message %> </p>
+              <p class="likes">Likes: <%= post.likes.size %></p>
+            </div>
+          </div>
+
+          <div class='row'>
+            <% (0...post.images.count).each do |number| %>
+              <div class='col'>
+                <%= image_tag(post.images[number], class: 'rounded', id: "#{number}") %><br>
+              </div>
+            <% end %>
+          </div>
+
+          <div class='row'>
+            <div class="col">
+              <p>Posted at: <%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %></p><br>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class="col-2 buttons">
+              <%= button_to 'Delete Post', {:controller => :posts,
+                  :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+            </div>
+
+            <div class="col-2 buttons">
+              <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button'>Update Post</a>
+            </div>
+
+            <div class="col-2 buttons">
+              <%= button_to 'Like Post', {:controller => :likes,
+                      :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+    </div>
+</div>
+
+
+
+
+
+
+============================================================
+
+
 
 <h1>Welcome <%= @user.fname %> <%= @user.lname %></h1>
 
