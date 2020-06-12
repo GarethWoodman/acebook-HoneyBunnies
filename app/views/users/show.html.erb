@@ -5,45 +5,56 @@
     <%= image_tag(@user.image, class: 'img-thumbnail float-left') %>
   </div>
 <% end%>
-<div class='row'>
-  <div class='col'>
-    <ul>
-      <li>
-        <%= @user.fname %>
-      </li>
-      <li>
-        <%= @user.lname %>
-      </li>
-      <li>
-        <%= @user.email %>
-      </li>
-    </ul>
 
-    <div class='col'>
-      <% if @user.id == session[:user_id] %>
-        <%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary' %>
-        <%= link_to 'Delete Account', '/', method: :delete, data: { confirm: 'Are you sure you want to delete your account?' }, class: 'btn btn-danger'%>
-      <% else %>
-        <% if Friend.find_by(user_id: session[:user_id], friend_id: @user.id) %>
-          <%= button_to 'Remove Friend', {:controller => :friends,
-              :action => 'destroy', :friend_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
-        <% else %>
-          <%= button_to 'Add Friend', {:controller => :friends,
-              :action => 'create', :friend_id => @user.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <div class='col'>
-      <br>
-      <h2>Friends<h2>
+<div style="width: 100%; overflow: hidden;">
+  <div style="width: 600px; float: left;">
+    <div class='row'>
+      <div class='col'>
         <ul>
-        <% @user.friends.each do |friend_record| %>
           <li>
-            <%= "#{friend_record.friend.fname} #{friend_record.friend.lname}" %>
+            <%= @user.fname %>
           </li>
-        <% end %>
+          <li>
+            <%= @user.lname %>
+          </li>
+          <li>
+            <%= @user.email %>
+          </li>
         </ul>
+
+        <div class='col'>
+          <% if @user.id == session[:user_id] %>
+            <%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary' %>
+            <%= link_to 'Delete Account', '/', method: :delete, data: { confirm: 'Are you sure you want to delete your account?' }, class: 'btn btn-danger'%>
+          <% else %>
+            <% if Friend.find_by(user_id: session[:user_id], friend_id: @user.id) %>
+              <%= button_to 'Remove Friend', {:controller => :friends,
+                  :action => 'destroy', :friend_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+            <% else %>
+              <%= button_to 'Add Friend', {:controller => :friends,
+                  :action => 'create', :friend_id => @user.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class='col'>
+          <br>
+          <h2>Friends<h2>
+            <ul>
+            <% @user.friends.each do |friend_record| %>
+              <li>
+                <%= "#{friend_record.friend.fname} #{friend_record.friend.lname}" %>
+              </li>
+            <% end %>
+            </ul>
+        </div>
+      </div>
     </div>
+  </div>
+  <div style="margin-left: 620px;">
+    <h2> Posts </h2>
+    <% @user.posts.each do |post| %>
+      <%= post.message %>
+    <% end %>
   </div>
 </div>
