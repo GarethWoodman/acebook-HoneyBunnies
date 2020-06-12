@@ -1,61 +1,120 @@
+<style>
+  #user_posts {
+    margin-right: 5px;
+    font-size: 11px;
+    text-align: center;
+  }
+</style>
 
 <div class="d-flex justify-content-center align-items-center">
-
-  <% if @user.image.attached? %>
-    <div class="m-4">
-      <%= image_tag(@user.image, class: 'rounded-circle', size: 200) %>
-    </div>
-  <% else %>
-    <div class="col-md-4">
-      <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png" class="rounded-circle-avatar" alt="Avatar">
-    </div>
-  <% end%>
-
   <div class='my-5'>
-   
-    <div class='ace-logo'>
-      <h2>Welcome <strong><%= @user.fname %></h2></strong>
+    <div style="width: 100%; overflow: hidden;">
+      <div style="width: 500px; float: left;">
+        <div class='row'>
+          <div class='col'>
+            <div class='ace-logo'>
+              <h2>Welcome <strong><%= @user.fname %></h2></strong>
+            </div>
+            <% if @user.image.attached? %>
+              <div class="m-4">
+                <%= image_tag(@user.image, class: 'rounded-circle', size: 200) %>
+              </div>
+            <% else %>
+              <div class="col-md-4">
+                <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png" class="rounded-circle-avatar" alt="Avatar">
+              </div>
+            <% end%>
+            <ul>
+              <li>
+                <%= @user.fname %>
+              </li>
+              <li>
+                <%= @user.lname %>
+              </li>
+              <li>
+                <%= @user.email %>
+              </li>
+            </ul>
+
+            <div class='col'>
+              <% if @user.id == session[:user_id] %>
+                <%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary' %>
+                <%= link_to 'Delete Account', '/', method: :delete, data: { confirm: 'Are you sure you want to delete your account?' }, class: 'btn btn-danger'%>
+              <% else %>
+                <% if Friend.find_by(user_id: session[:user_id], friend_id: @user.id) %>
+                  <%= button_to 'Remove Friend', {:controller => :friends,
+                      :action => 'destroy', :friend_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+                <% else %>
+                  <%= button_to 'Add Friend', {:controller => :friends,
+                      :action => 'create', :friend_id => @user.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class='col'>
+              <br>
+              <h3>Friends</h3>
+                <ul>
+                <% @user.friends.each do |friend_record| %>
+                  <% full_name = "#{friend_record.friend.fname} #{friend_record.friend.lname}" %>
+                  <li>
+                     <a href="http://localhost:3000/users/<%="#{friend_record.friend.id}"%>"><%= full_name %></a>
+                  </li>
+                <% end %>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="width: 400px; margin-left: 500px;">
+        <% if @user.id == session[:user_id] %>
+          <h3> Create Post </h3>
+          <div class="form-row align-items-center">
+            <div class="col-md-6 col-md-offset-3">
+              <% new_post = Post.new %>
+              <%= form_for new_post do |post| %>
+                <div>
+                  <%= post.label :message %>
+                  <%= post.text_area :message, class: 'form-control'%>
+                  <%= post.label 'Add Images' %>
+                  <%= post.file_field :images, multiple: true %></br>
+                  <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2", id: "user_posts" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <br>
+        <h3> Posts </h3>
+        <% @user.posts.each do |post| %>
+          <% likes = []%>
+          <%= image_tag(@user.image, class: 'rounded-circle', size: 100) if @user.image.attached? %><br>
+            <div class='atooltip'><p><%= post.message %> Likes: <%= post.likes.size %></p>
+              <% post.likes.each do |like| %>
+                <% likes << like.user.fname %>
+              <% end %>
+              <% if post.likes.size != 0 %>
+                <span class="atooltiptext"> <%= likes.join("\n")%></span>
+              <% end %>
+            </div>
+            <div class='row'>
+              <% if @user.id == session[:user_id] %>
+                <%= button_to 'Delete Post', {:controller => :posts,
+                :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
+
+                <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button' id='user_posts'>Update Post</a>
+              <% end %>
+
+              <% if likes.include?(User.find(session[:user_id]).fname) %>
+                <%= button_to 'Unlike Post', {:controller => :likes,
+                :action => 'destroy', :post_id => post.id, :user_id => session[:user_id], :path => "/users/#{@user.id}" }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
+              <% else %>
+                <%= button_to 'Like Post', {:controller => :likes,
+                  :action => 'create', :post_id => post.id, :path => "/users/#{@user.id}" }, :method => :post, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
     </div>
-    <div>
-    <ul>
-      <li>
-        <%= @user.fname %>
-      </li>
-      <li>
-        <%= @user.lname %>
-      </li>
-      <li>
-        <%= @user.email %>
-      </li>
-    </ul>
-    </div>
-    <% if @user.id == session[:user_id] %>
-      <%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary' %>
-      <%= link_to 'Delete Account', '/', method: :delete, data: { confirm: 'Are you sure you want to delete your account?' }, class: 'btn btn-danger'%>
-    <% else %>
-      <% if Friend.find_by(user_id: session[:user_id], friend_id: @user.id) %>
-        <%= button_to 'Remove Friend', {:controller => :friends,
-            :action => 'destroy', :friend_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
-      <% else %>
-        <%= button_to 'Add Friend', {:controller => :friends,
-            :action => 'create', :friend_id => @user.id }, :method => :post, class: 'btn btn-sm btn-primary' %>
-      <% end %>
-    <% end %>
   </div>
-</div>
-
-
-<div class="d-flex justify-content-center align-items-center">
-  <h2>Your Friends<h2>
-  <ul>
-    <% @user.friends.each do |friend_record| %>
-      <% if friend_record %>
-      <li>
-        <%= "#{friend_record.friend.fname} #{friend_record.friend.lname}" %>
-      </li>
-      <% else %>
-        <h2>You have no firends added</h2>
-      <% end %>
-    <% end %>
-  </ul>
 </div>
