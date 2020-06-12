@@ -20,8 +20,10 @@
         <% end %>
       </div>
     </div>
+    
     <div class="container my-2">
-        <% @posts.each do |post| %>
+        <% @posts.reverse.each do |post| %>
+        <div class='col'>
           <% likes = []%>
           <div class="row">
             <div class="col avatar">
@@ -86,8 +88,8 @@
                     :action => 'create', :post_id => post.id }, :method => :post, class: 'btn btn-sm btn-primary ace-blue' %>
                 <% end %>
               </div>
+          <% end %>
         <% end %>
-
-        <% end %>
+      </div>
     </div>
 </div>

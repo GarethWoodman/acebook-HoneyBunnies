@@ -38,7 +38,7 @@
 
             <div class='col'>
               <% if @user.id == session[:user_id] %>
-                <%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary' %>
+                <%= link_to 'Edit Profile', "/users/#{session[:user_id]}/edit", class: 'btn btn-primary ace-blue' %>
                 <%= link_to 'Delete Account', '/', method: :delete, data: { confirm: 'Are you sure you want to delete your account?' }, class: 'btn btn-danger'%>
               <% else %>
                 <% if Friend.find_by(user_id: session[:user_id], friend_id: @user.id) %>
@@ -66,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div style="width: 400px; margin-left: 500px;">
+      <div style="min-width: 400px; margin-left: 500px;">
         <% if @user.id == session[:user_id] %>
           <h3> Create Post </h3>
           <div class="form-row align-items-center">
@@ -78,7 +78,7 @@
                   <%= post.text_area :message, class: 'form-control'%>
                   <%= post.label 'Add Images' %>
                   <%= post.file_field :images, multiple: true %></br>
-                  <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2", id: "user_posts" %>
+                  <%= post.submit "Submit", class: "btn btn-primary my-2 ace-blue", id: "user_posts" %>
                 </div>
               <% end %>
             </div>
@@ -88,29 +88,32 @@
         <h3> Posts </h3>
         <% @user.posts.each do |post| %>
           <% likes = []%>
-          <%= image_tag(@user.image, class: 'rounded-circle', size: 100) if @user.image.attached? %><br>
-            <div class='atooltip'><p><%= post.message %> Likes: <%= post.likes.size %></p>
-              <% post.likes.each do |like| %>
-                <% likes << like.user.fname %>
-              <% end %>
-              <% if post.likes.size != 0 %>
-                <span class="atooltiptext"> <%= likes.join("\n")%></span>
-              <% end %>
+          <%= image_tag(@user.image, class: 'rounded-circle my-3', size: 100) if @user.image.attached? %><br>
+            <div class=''>
+              <div class='atooltip'><p><strong><%= post.message %></strong></p>
+                <% post.likes.each do |like| %>
+                  <% likes << like.user.fname %>
+                <% end %>
+                <% if post.likes.size != 0 %>
+                  <span class="atooltiptext"> <%= likes.join("\n")%></span>
+                <% end %>
+                <p class='text-muted'>Likes: <%= post.likes.size %></p>
+              </div>
             </div>
-            <div class='row'>
+            <div class='row my-1'>
               <% if @user.id == session[:user_id] %>
                 <%= button_to 'Delete Post', {:controller => :posts,
-                :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
+                :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-danger', id: 'user_posts' %>
 
-                <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button' id='user_posts'>Update Post</a>
+                <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm ace-blue' role='button' id='user_posts'>Update Post</a>
               <% end %>
 
               <% if likes.include?(User.find(session[:user_id]).fname) %>
                 <%= button_to 'Unlike Post', {:controller => :likes,
-                :action => 'destroy', :post_id => post.id, :user_id => session[:user_id], :path => "/users/#{@user.id}" }, :method => :delete, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
+                :action => 'destroy', :post_id => post.id, :user_id => session[:user_id], :path => "/users/#{@user.id}" }, :method => :delete, class: 'btn btn-sm btn-primary ace-blue', id: 'user_posts' %>
               <% else %>
                 <%= button_to 'Like Post', {:controller => :likes,
-                  :action => 'create', :post_id => post.id, :path => "/users/#{@user.id}" }, :method => :post, class: 'btn btn-sm btn-primary', id: 'user_posts' %>
+                  :action => 'create', :post_id => post.id, :path => "/users/#{@user.id}" }, :method => :post, class: 'btn btn-sm btn-primary ace-blue', id: 'user_posts' %>
               <% end %>
             </div>
         <% end %>
