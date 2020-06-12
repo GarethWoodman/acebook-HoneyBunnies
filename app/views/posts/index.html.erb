@@ -2,20 +2,21 @@
 
     <div class="card text-center">
 
-      <div class="card-header">
-        <h5>Welcome <%= @user.fname.capitalize %> <%= @user.lname.capitalize %></h5>
+      <div class="card-header ace-welcome">
+        <h2>Welcome <%= @user.fname.capitalize %> <%= @user.lname.capitalize %></h2>
       </div>
 
-      <div class="card-body float-right">
+      <div class="my-4 float-right">
         <%= form_for @new_post do |post| %>
-          <div class="row">
-              <%= post.label :message %>
-              <%= post.text_area :message, class: 'form-control', placeholder: 'Say something to the world...'%>
-              <div class="row file-field">
-                <%= post.file_field :images, multiple: true %>
+          <div class="col">
+              <div class='col-sm'>
+                <%= post.text_area :message, class: 'form-control', placeholder: 'Say something to the world...'%>
               </div>
-              <div class="col submit">
-                <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2 btn-header" %>
+              <div class="row my-2">
+                <%= post.submit "Submit", class: "btn btn-primary ml-5 my-2 btn-header ace-blue" %>
+                <%= post.file_field :images, multiple: true, class: 'mx-2 my-3'%>
+              </div>
+              <div class="col-sm submit">
               </div>
           </div>
         <% end %>
