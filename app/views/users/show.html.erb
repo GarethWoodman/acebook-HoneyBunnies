@@ -78,7 +78,7 @@
                   <%= post.text_area :message, class: 'form-control'%>
                   <%= post.label 'Add Images' %>
                   <%= post.file_field :images, multiple: true %></br>
-                  <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2" %>
+                  <%= post.submit "Submit", class: "btn btn-sm btn-primary my-2", id: "user_posts" %>
                 </div>
               <% end %>
             </div>
