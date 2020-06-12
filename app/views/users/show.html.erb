@@ -42,8 +42,9 @@
           <h2>Friends<h2>
             <ul>
             <% @user.friends.each do |friend_record| %>
+              <% full_name = "#{friend_record.friend.fname} #{friend_record.friend.lname}" %>
               <li>
-                <%= "#{friend_record.friend.fname} #{friend_record.friend.lname}" %>
+                 <a href="http://localhost:3000/users/<%="#{friend_record.friend.id}"%>"><%= full_name %></a>
               </li>
             <% end %>
             </ul>
@@ -54,7 +55,32 @@
   <div style="margin-left: 620px;">
     <h2> Posts </h2>
     <% @user.posts.each do |post| %>
-      <%= post.message %>
+      <% likes = []%>
+      <%= image_tag(@user.image, class: 'rounded-circle', size: 100) if @user.image.attached? %><br>
+        <div class='atooltip'><p><%= post.message %> Likes: <%= post.likes.size %></p>
+          <% post.likes.each do |like| %>
+            <% likes << like.user.fname %>
+          <% end %>
+          <% if post.likes.size != 0 %>
+            <span class="atooltiptext"> <%= likes.join("\n")%></span>
+          <% end %>
+        </div>
+        <div class='row'>
+          <% if @user.id == session[:user_id] %>
+            <%= button_to 'Delete Post', {:controller => :posts,
+            :action => 'destroy', :id => post.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+
+            <a href="/posts/<%= post.id %>/edit" class='btn btn-primary btn-sm' role='button'>Update Post</a>
+          <% end %>
+
+          <% if likes.include?(@user.fname) %>
+            <%= button_to 'Unlike Post', {:controller => :likes,
+            :action => 'destroy', :post_id => post.id, :user_id => @user.id }, :method => :delete, class: 'btn btn-sm btn-primary' %>
+          <% else %>
+            <%= button_to 'Like Post', {:controller => :likes,
+              :action => 'create', :post_id => post.id, :path => "/users/#{@user.id}" }, :method => :post, class: 'btn btn-sm btn-primary' %>
+          <% end %>
+        </div>
     <% end %>
   </div>
 </div>
