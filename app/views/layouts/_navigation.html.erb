@@ -1,17 +1,17 @@
 <nav class='navbar ace-blue text-white'>
-  <div class='row container'>
+  <div class='right menu'>
      <a href="/" class="navbar-brand logo text-white ace-logo">acebook</a>
   </div>
-  <div class='row justify-content-end'>
+  <div class='navbar'>
     <% if session[:user_id] %>
       <div class='col'>
-        <%= link_to 'Sign Out', '/sessions/destroy', class: 'btn btn-light' %>
-        <%= link_to 'Profile', "/users/#{session[:user_id]}", class: 'btn btn-light' %>
-        <%= link_to 'All Posts', '/posts', class: 'btn btn-light' %>
+        <%= link_to 'All Posts', '/posts', class: 'btn btn-sm btn-light' %>
+        <%= link_to 'Profile', "/users/#{session[:user_id]}", class: 'btn btn-sm btn-light' %>
+        <%= link_to 'Sign Out', '/sessions/destroy', class: 'btn btn-sm btn-light' %>
       </div>
     <% else %>
-      <div class='col'>
-        <%= link_to 'Sign In', '/sessions/new', class: 'btn btn-light' %>
+      <div class='row'>
+        <%= link_to 'Sign In', '/sessions/new', class: 'btn btn-sm btn-light' %>
       </div>
     <% end %>
   </div>

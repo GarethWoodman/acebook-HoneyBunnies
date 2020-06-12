@@ -2,9 +2,11 @@ body {
   height: 100%;
   font-family:verdana,arial,sans-serif;
   color:#555555;
+  background-color: #e9eaed;
 }
 .ace-blue {
   background-color: #3B5999;
+  border-color: #3B5999;
 }
 a:hover {
   text-decoration:none;
@@ -13,4 +15,16 @@ a:hover {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 38px;
   font-weight: 600;
+}
+#file-upload-button {
+  background-color: #3B5999;
+}
+#user_image input[type="file"] {
+  display: none;
+  }
+  
+@media all and (max-width: 900px) {
+  #bunny {
+    display: none;
+  }
 }

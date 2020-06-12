@@ -1,5 +1,7 @@
-   <% flash.each do |type, msg| %>
-      <div class="alert alert-info">
-        <%= msg %>
-      </div>
-    <% end %>
+<div class='my-2 mx-4'>
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-primary" role="alert">
+      <strong>Holy guacamole!</strong>  <%= msg %>
+    </div>
+  <% end %>
+</div>

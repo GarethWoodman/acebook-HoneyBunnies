@@ -1,34 +1,45 @@
-<div class='float-right'>
 
-  <% if session[:user_id] %>
-    <h2>Welcome to acebook</h2>
-
-  <% else %>
-
-    <h1>Create account</h1>
-    <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
-
-      <%= f.label 'First Name' %>
-      <%= f.text_field :fname %> <br />
-
-      <%= f.label 'Last Name' %>
-      <%= f.text_field :lname %> <br />
-
-      <%= f.label :email %>
-      <%= f.text_field :email %> <br />
-
-      <%= f.label :password %>
-      <%= f.password_field :password %> <br />
-
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %> <br />
-
-      <%= f.label :image %>
-      <%= f.file_field :image%> <br /><br />
-
-      <%= f.submit "Create account", class: "btn btn-sm btn-primary my-2" %>
-
-    <% end %>
-
-  <% end %>
+<div class='row float-right'>
+  <div class=''>
+    <div class=''>
+      <div class='card-body'>
+       <img src='https://i.redd.it/29p2kvnhespy.gif' alt='Flowers in Chania' id='bunny' class='rounded-circle'>
+      </div>
+    </div>
   </div>
+  <div class=''>
+    <div class=''>
+      <div class='card-body'>
+        <% if session[:user_id] %>
+          <h2>Welcome to acebook</h2>
+        <% else %>
+        <div class='ace-logo'>
+          <h1>Create account</h1>
+        </div>
+          <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
+
+            <%= f.label 'First Name' %>
+            <%= f.text_field :fname %> <br />
+
+            <%= f.label 'Last Name' %>
+            <%= f.text_field :lname %> <br />
+
+            <%= f.label :email %>
+            <%= f.text_field :email %> <br />
+
+            <%= f.label :password %>
+            <%= f.password_field :password %> <br />
+
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation %> <br />
+
+            <%= f.label :image %>
+            <%= f.file_field :image%> <br /><br />
+
+            <%= f.submit 'Create account', class: 'btn btn-sm btn-primary ace-blue' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
