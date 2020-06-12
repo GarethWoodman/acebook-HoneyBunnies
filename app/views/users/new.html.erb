@@ -17,26 +17,19 @@
           <h1>Create account</h1>
         </div>
           <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
+            <div class='card bg-transparent border-0'>
+            <%= f.text_field :fname, placeholder: 'Name', class: 'my-2' %>
 
-            <%= f.label 'First Name' %>
-            <%= f.text_field :fname %> <br />
+            <%= f.text_field :lname, placeholder: 'Last Name', class: 'my-2' %>
+            <%= f.text_field :email, placeholder: 'email', class: 'my-2' %>
 
-            <%= f.label 'Last Name' %>
-            <%= f.text_field :lname %> <br />
-
-            <%= f.label :email %>
-            <%= f.text_field :email %> <br />
-
-            <%= f.label :password %>
-            <%= f.password_field :password %> <br />
-
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation %> <br />
-
-            <%= f.label :image %>
-            <%= f.file_field :image%> <br /><br />
-
-            <%= f.submit 'Create account', class: 'btn btn-primary ace-blue' %>
+            <%= f.password_field :password, placeholder: 'Password', class: 'my-2' %>
+            <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'my-2' %>
+            <%= f.file_field :image, class: 'my-4'%>
+            <div>
+              <%= f.submit 'Create account', class: 'btn btn-primary ace-blue' %>
+            </div>
+            </div>
           <% end %>
         <% end %>
       </div>

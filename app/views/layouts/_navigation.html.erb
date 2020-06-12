@@ -1,8 +1,8 @@
 <nav class='navbar ace-blue text-white'>
-  <div class='right menu'>
+  <div class='right menu ml-5'>
      <a href="#" class="navbar-brand logo text-white ace-logo">acebook</a>
   </div>
-  <div class='navbar'>
+  <div class='navbar mr-5'>
     <% if session[:user_id] %>
       <div class='col'>
         <%= link_to 'All Posts', '/posts', class: 'btn btn-sm btn-light' %>
