@@ -58,7 +58,7 @@
                 <% @user.friends.each do |friend_record| %>
                   <% full_name = "#{friend_record.friend.fname} #{friend_record.friend.lname}" %>
                   <li>
-                     <a href="http://localhost:3000/users/<%="#{friend_record.friend.id}"%>"><%= full_name %></a>
+                     <a href="https://acebook-honeybunnies.herokuapp.com/users/<%="#{friend_record.friend.id}"%>"><%= full_name %></a>
                   </li>
                 <% end %>
                 </ul>
