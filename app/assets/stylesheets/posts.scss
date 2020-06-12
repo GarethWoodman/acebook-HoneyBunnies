@@ -73,17 +73,17 @@
   margin-right: 5px;
 }
 
-.but btn-primary:hover {
-	background-color: white;
-	border-color: white;
-  color: black;
-}
-
-.but btn-primary {
-	background-color: white;
-  color: blue;
-	border-color: white;
-}
+// .button:hover {
+// 	// background-color: white;
+// 	// border-color: white;
+//   color: white;
+// }
+// 
+// .button {
+// 	background-color:;
+//   color: blue;
+// 	border-color: white;
+// }
 
 .atooltip {
   position: relative;
@@ -92,12 +92,12 @@
 
 .atooltip .atooltiptext {
   visibility: hidden;
-  width: 60px;
-  background: rgba(0, 0, 0, 0.8);
+  width: auto;
+  background: blue;
   color: #fff;
-  text-align: left;
+  text-align: justify;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px 10px;
 
   /* Position the tooltip */
   position: absolute;
